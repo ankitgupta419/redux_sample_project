@@ -1,9 +1,13 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 const Carousel = React.createClass({
 
+  clickImage(e,movieId){
+  	// console.log(movieId)
+  	browserHistory.push('/view/'+movieId);
+  },
   render() {
     const settings = {
     	infinite: false,
@@ -38,9 +42,7 @@ const Carousel = React.createClass({
     let childrens = (this.props.movies || []).map((movie, index) => {
 	    return (
 	      <div key={index}>
-				<Link to={'/view/'+movie.imdb_id}>
-					<img src={movie.poster.large} alt={movie.title}  />
-	        </Link>
+				<img src={movie.poster.large} alt={movie.title} onClick={(event)=> this.clickImage(event,movie.imdb_id)} className="pointerClass" />	
 	      </div>
 	    )
 	  });
